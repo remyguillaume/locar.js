@@ -118,7 +118,7 @@ Try it on either a desktop machine or an Android device running Chrome. On a mob
 If you do not have a suitable mobile device, you can simulate rotation with the mouse. The code below will do this (add to your main block of code, just before the rendering function):
 
 ```javascript
-const rotationStep = THREE.Math.degToRad(2);
+const rotationStep = THREE.MathUtils.degToRad(2);
 
 let mousedown = false, lastX =0;
 
