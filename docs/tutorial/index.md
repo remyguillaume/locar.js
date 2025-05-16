@@ -17,8 +17,8 @@ Here is a sample `package.json` containing three.js and LocAR.js as dependencies
 ```
 {
   "dependencies": {
-    "three": "^0.169.0",
-    "locar": "^0.0.2"
+    "three" : "^0.175.0",
+    "locar" : "^0.0.11"    
   },
   "devDependencies": {
     "vite": "^5.4.8"
