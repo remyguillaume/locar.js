@@ -102,7 +102,7 @@ Rather than setting the box's `position` as we would normally do in standard thr
 Having positioned our box in a specific real-world location, we now need to place **ourselves** (i.e. the camera) at a given real-world location We can do this with `LocAR.LocationBased`s `fakeGps()` method, which takes longitude and latitude as parameters:
 
 ```javascript
-arjs.fakeGps(-0.72, 51.05);
+locar.fakeGps(-0.72, 51.05);
 ```
 
 This places us just to the south of the red box. By default, we face north, so the red box will appear in front of us.
