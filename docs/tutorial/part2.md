@@ -10,6 +10,19 @@ We will also look at how we can use the device's orientation controls, so that t
 
 Here is a revised version of the previous example which obtains your real GPS location:
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<title>LocAR.js - Hello World</title>
+<script type='module' src='src/main.js'></script>
+</head>
+<body>
+    <button id="start-btn">Start</button>
+</body>
+</html>
+```
+
 ```javascript
 import * as THREE from 'three';
 import * as LocAR from 'locar';
@@ -37,21 +50,36 @@ const cam = new LocAR.Webcam({
     }
 });
 
-
-locar.startGps();
-locar.add(cube, -0.72, 51.0501);
-
-renderer.setAnimationLoop(animate);
-
+function start() {
+    locar.startGps();
+    locar.add(cube, -0.72, 51.0501);
+    renderer.setAnimationLoop(animate);
+}
+document.getElementById('start-btn').addEventListener('click', start);
 
 function animate() {
     renderer.render(scene, camera);
 }
 ```
-Note that we only needed to make one change, we replace the `fakeGps()` call with:
+Note that we needed to make two changes:
+
+1. We added a button:
 ```
-locar.startGps();
+<button id="start-btn">Start</button>
 ```
+
+2. We replaced the `fakeGps()` call with `startGps()`, and we  wrap it in a function:
+```
+function start() {
+    locar.startGps();
+    locar.add(cube, -0.72, 51.0501);
+    renderer.setAnimationLoop(animate);
+}
+document.getElementById('start-btn').addEventListener('click', start);
+```
+
+You must wrap your geolocation (or `locar.startGps()`) code inside a function and call it only after a user action (like a button click), because modern browsers require geolocation requests to be triggered by a direct user interaction (like a click or tap). Automatic access to geolocation without user interaction (for exemple when the application starts) will be blocked by browsers for privacy reasons.
+
 Using the Geolocation API this will make the application start listening for GPS updates. *The nice thing is we do not need to do anything else. The `LocationBased` object automatically updates the camera x and z coordinates to reflect our current GPS location.* Specifically, the GPS latitude and longitude are converted to Spherical Mercator, the sign of `z` reversed (to match the OpenGL coordinate system), and the resulting coordinates used for the camera coordinates.
 
 ### Using the device orientation controls
